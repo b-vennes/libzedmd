@@ -225,7 +225,9 @@ void ZeDMDSpi::QueueCommand(char command, uint8_t* buffer, int size)
   switch (command)
   {
     case ZEDMD_COMM_COMMAND::ClearScreen:
-      SendChunks(m_allBlack, GetWidth() * GetHeight() * 2);  // RGB565
+      // Queue a black frame instead of sending it directly, to not interleave with the run thread's transfer.
+      if (FillDelayed()) ClearFrames();
+      QueueFrame((uint8_t*)m_allBlack, GetWidth() * GetHeight() * 2);  // RGB565
       break;
 
     default:

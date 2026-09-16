@@ -42,7 +42,8 @@
 #define ZEDMD_COMM_FRAME_QUEUE_SIZE_MAX 8
 
 #define ZEDMD_ZONES_BYTE_LIMIT_RGB565 (128 * 4 * 2 + 16)
-#define ZEDMD_ZONES_BYTE_LIMIT_RGB888 (128 * 4 * 3 + 16)
+// Must not exceed the firmware's BUFFER_SIZE (1152), otherwise uncompressed chunks get rejected.
+#define ZEDMD_ZONES_BYTE_LIMIT_RGB888 (128 * 3 * 3)
 
 typedef enum
 {

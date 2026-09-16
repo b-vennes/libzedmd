@@ -277,7 +277,8 @@ void ZeDMDComm::QueueFrame(uint8_t* data, int size, bool rgb888)
     {
       for (uint8_t z = 0; z < m_zoneHeight; z++)
       {
-        memcpy(&zone[z * m_zoneWidth * 2], &data[((y + z) * m_width + x) * bitsPerPixel], m_zoneWidth * bitsPerPixel);
+        memcpy(&zone[z * m_zoneWidth * bitsPerPixel], &data[((y + z) * m_width + x) * bitsPerPixel],
+               m_zoneWidth * bitsPerPixel);
       }
 
       bool black = (0 == memcmp(zone, m_allBlack, zoneBytes));
